@@ -1,0 +1,20 @@
+{
+  "title": "Workshop: Prometheus Anomaly Detection",
+  "description": "Detecting anomalies on prometheus time-series metrics",
+  "courses": [
+    {
+      "pathway_id": "4n4nd/playgrounds",
+      "title": "Intro to Prometheus and Grafana on OpenShift",
+      "id": "openshift311-cluster",
+      "course_id": "openshift311",
+      "description": ""
+    },
+    {
+      "pathway_id": "4n4nd/ai-machine-learning",
+      "title": "Playing with the Prometheus API Client",
+      "id": "prometheus-api-client",
+      "course_id": "prometheus-api-client",
+      "description": ""
+    }
+  ]
+}
