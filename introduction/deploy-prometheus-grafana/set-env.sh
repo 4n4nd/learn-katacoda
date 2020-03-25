@@ -9,7 +9,7 @@ oc new-project metrics-demo
 oc new-app quay.io/4n4nd/metrics-demo-app:workshop
 oc expose svc/metrics-demo-app
 # cd /tmp/prometheus
-oc create -f ~/volumes.json --as system:admin > /dev/null 2>&1
+# oc create -f ~/volumes.json --as system:admin > /dev/null 2>&1
 #
 clear
 echo -e "Welcome to your interactive environment. OpenShift is configured and ready to use."

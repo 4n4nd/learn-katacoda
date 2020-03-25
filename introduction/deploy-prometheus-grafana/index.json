@@ -39,7 +39,7 @@
             "text": "finish.md"
         },
         "assets": {
-          "host01": [{"file": "deploy-prometheus.yaml", "target": "~/"}, {"file": "volumes.json", "target": "~/"}]
+          "host01": [{"file": "deploy-prometheus.yaml", "target": "~/"}]
         }
     }
 }
