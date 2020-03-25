@@ -4,11 +4,11 @@ curl -LO https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem > /dev/n
 oc login -u developer -p developer --certificate-authority=lets-encrypt-x3-cross-signed.pem --insecure-skip-tls-verify=true > /dev/null 2>&1
 
 # deploy the demo metrics app
-mkdir -p /tmp/prometheus
+# mkdir -p /tmp/prometheus
 oc new-project metrics-demo
 oc new-app quay.io/4n4nd/metrics-demo-app:workshop
 oc expose svc/metrics-demo-app
-cd /tmp/prometheus
+# cd /tmp/prometheus
 oc create -f ~/volumes.json --as system:admin > /dev/null 2>&1
 #
 clear

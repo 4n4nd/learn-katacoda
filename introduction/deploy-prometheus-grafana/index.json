@@ -6,18 +6,16 @@
     "difficulty": "beginner",
     "time": "10-15 minutes",
     "backend": {
-      "imageid": "openshift-3-11",
-      "port": 8443
+      "imageid": "openshift-4-2"
     },
     "files": [
         "prometheus-configmap.yaml"
     ],
     "environment": {
         "showdashboard": true,
-        "dashboard": "Dashboard",
+        "dashboards": [{"name": "Console", "href": "https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com"}],
         "uilayout": "editor-terminal",
         "uisettings": "yaml",
-        "uieditorpath": "/tmp/prometheus",
         "hideintro": false,
         "hidefinish": false
     },
@@ -41,7 +39,7 @@
             "text": "finish.md"
         },
         "assets": {
-          "host01": [{"file": "deploy-prometheus.yaml", "target": "/tmp/prometheus"}, {"file": "volumes.json", "target": "~/"}]
+          "host01": [{"file": "deploy-prometheus.yaml", "target": "~/"}, {"file": "volumes.json", "target": "~/"}]
         }
     }
 }

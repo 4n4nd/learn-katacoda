@@ -7,9 +7,9 @@ First let's create a new namespace to deploy our monitoring tools.
 Now we need to edit the configmap for our prometheus deployment, so that Prometheus knows to scrape our demo application for metrics.
 To do that, we need to add the following section:
 
-we will store the configmap template in `prometheus-configmap.yaml`{{open}}
+we will store the configmap template in `~/prometheus-configmap.yaml`{{open}}
 
-<pre class="file" data-filename="prometheus-configmap.yaml" data-target="replace">
+<pre class="file" data-filename="~/prometheus-configmap.yaml" data-target="replace">
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -30,7 +30,7 @@ data:
 
 The second half defines the new targets that Prometheus should scrape data from. In this example, we have defined one new target below.
 
-<pre class="file" data-filename="prometheus-configmap.yaml">
+<pre class="file" data-filename="~/prometheus-configmap.yaml">
           - targets: ['metrics-demo-app-metrics-demo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com']
             labels:
               group: 'pad'
