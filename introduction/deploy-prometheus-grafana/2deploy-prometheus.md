@@ -6,6 +6,9 @@ We have created a namespace called `pad-monitoring` on Openshift where we will d
 * To make sure we are using our namespace run the following command: <br>
 `oc project pad-monitoring`{{execute}}
 
+* You can also go to the Openshift console and check the namespace [here](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/cluster/projects/pad-monitoring)
+
+*The credentials to access the openshift console are `developer/developer`*
 
 ### Configure Prometheus for our application
 
@@ -58,7 +61,7 @@ Above, you can see that we have added a label `group: 'pad'` <br>
 So all the metrics from our demo application can be
 queried with a singe PromQL query, i.e. `{group="pad"}`
 
-The configmap file should be stored in `~/prometheus-configmap.yaml`{{open}}
+The configmap file should be stored in `prometheus-configmap.yaml`{{open}}
 
 ### Deploy Prometheus with new configuration
 
@@ -74,8 +77,17 @@ The Prometheus Console should be available [here](http://prometheus-demo-route-p
 
 You can also use the [Openshift dashboard](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/pad-monitoring/deploymentconfigs/prometheus-demo) to check on the Prometheus deployment.
 
-The credentials to access the openshift console are `developer/developer`
+*The credentials to access the openshift console are `developer/developer`*
 
+### Check if the configuration was updated successfully
+Once the Prometheus server is ready to take requests, <br>
+* visit the targets page for prometheus, [here](http://prometheus-demo-route-pad-monitoring.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/targets)
+
+It should look something like:
+![Prometheus Targets Page](../../assets/introduction/deploy-prometheus-grafana/02-prometheus-targets-page.png)
+
+* If you cannot find the demo application, in the targets list, <br>
+Try to fix your prometheus configuration in the configmap file `prometheus-configmap.yaml`{{open}} and repeat the previous step.
 
 ### Check application metrics
 * Once Prometheus is deployed, you can click [here](http://prometheus-demo-route-pad-monitoring.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/graph?g0.range_input=1h&g0.expr={group%3D"pad"}) to see all the metrics for the demo application
