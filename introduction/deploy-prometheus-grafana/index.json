@@ -21,7 +21,7 @@
     },
     "details": {
         "steps": [{
-            "title": "Step 1 - Deploying a metrics exposing demo application",
+            "title": "Step 1 - Example Prometheus metrics exposing application",
             "text": "1deploy-demo-app.md"
         }, {
             "title": "Step 2 - Deploy Prometheus to collect exposed metrics",
