@@ -1,4 +1,4 @@
-In this tutorial you will learn how to use Prometheus to scrape and store metrics from a sample application, and then use Grafana
+In this tutorial you will learn how to use Prometheus to scrape and store metrics from a sample application, and then use [Grafana](https://github.com/grafana/grafana)
 to visualize the collected metrics.
 
 ## Let's get started

@@ -1,10 +1,10 @@
 
-### Create Namespace
+### Namespace for Monitoring
 
-First let's create a new namespace to deploy our monitoring tools. This will be the project where all our monitoring applications
-will be deployed. Let's call it `pad-monitoring`
+We have created a namespace called `pad-monitoring` on Openshift where we will deploy all our monitoring applications (Prometheus and Grafana).
 
-`oc new-project pad-monitoring`{{execute}}
+* To make sure we are using our namespace run the following command: <br>
+`oc project pad-monitoring`{{execute}}
 
 
 ### Configure Prometheus for our application
@@ -14,22 +14,26 @@ In Openshift, we use ConfigMaps to manage configurations for our applications. (
 * We will use the following configmap to set up our Prometheus instance.
 
 <pre class="file" data-filename="~/prometheus-configmap.yaml" data-target="replace">
-apiVersion: v1          # Click on 'Copy to Editor' --->
-kind: ConfigMap
-metadata:
-  name: prometheus-demo
-data:
-  prometheus.yml: |
-    global:
-      external_labels:
-        monitor: prometheus
-    scrape_configs:
-      - job_name: 'prometheus'
+apiVersion: template.openshift.io/v1          # Click on 'Copy to Editor' --->
+kind: Template
+objects:
+  - apiVersion: v1          
+    kind: ConfigMap
+    metadata:
+      name: prometheus-demo
+      namespace: pad-monitoring
+    data:     
+      prometheus.yml: |     # Prometheus configuration starts below
+        global:                   
+          external_labels:
+            monitor: prometheus
+        scrape_configs:
+          - job_name: 'prometheus'
 
-        static_configs:
-          - targets: ['localhost:9090']
-            labels:
-              group: 'prometheus'
+            static_configs:
+              - targets: ['localhost:9090'] # Configure Prometheus to scrape itself
+                labels:
+                  group: 'prometheus'
 </pre>
 
 * Click on `Copy to Editor` for the above yaml block, to copy it to the editor.
@@ -39,9 +43,9 @@ This will replace all the text in the editor with the above yaml text block
 To do that, we need to add the following section:
 
 <pre class="file" data-filename="~/prometheus-configmap.yaml">
-          - targets: ['metrics-demo-app-metrics-demo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com'] # Click on 'Copy to Editor'->
-            labels:
-              group: 'pad'
+              - targets: ['metrics-demo-app-metrics-demo.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com'] # Click on 'Copy to Editor'->
+                labels:
+                  group: 'pad'
 </pre>
 
 In the above yaml block, we have defined a new targets list for our prometheus to collect metrics from.
@@ -56,18 +60,19 @@ queried with a singe PromQL query, i.e. `{group="pad"}`
 
 The configmap file should be stored in `~/prometheus-configmap.yaml`{{open}}
 
-### Deploy Prometheus
+### Deploy Prometheus with new configuration
 
-Once we have updated the configuration with our new target, we can go ahead and create this configmap in our namespace: <br>
-`oc create -f prometheus-configmap.yaml -n pad-monitoring`{{execute}}
+* Once we have updated the configuration with our new target, we can go ahead and update this configmap in our namespace: <br>
+`oc process -f ~/prometheus-configmap.yaml | oc apply -f -`{{execute}}
 
-and deploy it using the following command: <br>
-`oc process -f deploy-prometheus.yaml | oc apply -n pad-monitoring -f -`{{execute}}
+* Update the Prometheus deployment using the following command: <br>
+`oc rollout latest dc/prometheus-demo -n pad-monitoring`{{execute}}
 
-To see the url for your Prometheus instance, run the following command:
-`echo -e "http://$(oc get route prometheus-demo-route -o jsonpath='{.spec.host}' -n pad-monitoring)"`{{execute}}
+After this, it might take a couple minutes for the Prometheus server to be ready to take requests.
 
-you can use the [Openshift dashboard](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/pad-monitoring/deploymentconfigs/prometheus-demo) to check on the Prometheus deployment.
+The Prometheus Console should be available [here](http://prometheus-demo-route-pad-monitoring.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com)
+
+You can also use the [Openshift dashboard](https://console-openshift-console-[[HOST_SUBDOMAIN]]-443-[[KATACODA_HOST]].environments.katacoda.com/k8s/ns/pad-monitoring/deploymentconfigs/prometheus-demo) to check on the Prometheus deployment.
 
 The credentials to access the openshift console are `developer/developer`
 
