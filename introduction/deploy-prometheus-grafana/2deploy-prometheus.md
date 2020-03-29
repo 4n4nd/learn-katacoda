@@ -56,7 +56,7 @@ queried with a singe PromQL query, i.e. `{group="pad"}`
 
 The configmap file should be stored in `~/prometheus-configmap.yaml`{{open}}
 
-### Deploying Prometheus
+### Deploy Prometheus
 
 Once we have updated the configuration with our new target, we can go ahead and create this configmap in our namespace: <br>
 `oc create -f prometheus-configmap.yaml -n pad-monitoring`{{execute}}
