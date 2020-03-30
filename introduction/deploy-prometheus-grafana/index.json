@@ -24,11 +24,14 @@
             "title": "Step 1 - Example Prometheus metrics exposing application",
             "text": "1deploy-demo-app.md"
         }, {
-            "title": "Step 2 - Deploy Prometheus to collect exposed metrics",
+            "title": "Step 2 - Deploying Prometheus to collect exposed metrics",
             "text": "2deploy-prometheus.md"
         }, {
             "title": "Step 3 - Deploying Grafana to visualize Prometheus metrics",
             "text": "3deploy-grafana.md"
+        }, {
+            "title": "Step 4 - Visualize Metrics in Grafana",
+            "text": "4create-dashboard.md"
         }],
         "intro": {
             "courseData": "env-init.sh",
