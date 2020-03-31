@@ -4,17 +4,21 @@
     "courses": [
       {
         "pathway_id": "4n4nd-debug/introduction",
+        "external_link": "https://learn.openshift.com/introduction/deploy-prometheus-grafana/",
         "title": "How to set up Prometheus and Grafana on OpenShift",
-        "id": "deploy-prometheus-grafana",
         "course_id": "deploy-prometheus-grafana",
-        "description": ""
       },
       {
         "pathway_id": "4n4nd-debug/ai-machine-learning",
-        "title": "Playing with the Prometheus API Client",
-        "id": "prometheus-api-client",
+        "external_link": "https://learn.openshift.com/ai-machine-learning/prometheus-api-client/",
         "course_id": "prometheus-api-client",
-        "description": ""
+        "title": "Prometheus metrics for Data Science on OpenShift"
+      },
+      {
+        "pathway_id": "4n4nd-debug/ai-machine-learning",
+        "external_link": "https://learn.openshift.com/ai-machine-learning/prometheus-timeseries-forecasting/",
+        "course_id": "prometheus-timeseries-forecasting",
+        "title": "Time series forecasting for Prometheus metrics"
       }
     ]
   }
